@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:training/screens/conversation_page.dart';
+import 'package:training/screens/start_new_message.dart';
 import 'package:training/widget/appBar_tab.dart';
 
 void main() {
@@ -18,6 +19,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      routes: {
+
+        "startNewMessageScreen": (context) =>StartNewMessageScreen()
+
+
+      },
       home: const MyHomePage(),
     );
   }

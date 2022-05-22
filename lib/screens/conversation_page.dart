@@ -35,7 +35,7 @@ class ConversationPage extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                print("Activate Me!");
+                Navigator.pushNamed(context, "startNewMessageScreen");
               }, // TODO 1: Add FLOATING ACTION BUTTON functionn
               // TODO 2: Change message Icon
               icon: const Icon(Icons.message),
