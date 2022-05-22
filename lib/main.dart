@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:training/screens/conversation_page.dart';
 import 'package:training/widget/appBar_tab.dart';
 
 void main() {
@@ -45,68 +46,79 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 0,
-          backgroundColor: Colors.grey[200],
-        ),
-        body: SafeArea(
-          child: Row(
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.1,
-                color: Colors.grey[300],
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 6,
-                  ),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.07,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30),
-                      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.1,
+              color: Colors.grey[300],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 6,
+                ),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: List.generate(
-                              tabList.length,
-                              (index) => TabWidget(
-                                    tabIcon:
-                                        tabList[index]['tabIcon'].toString(),
-                                    tabLael:
-                                        tabList[index]['tabLabel'].toString(),
-                                    activeTab: activeTabIndex == index,
-                                    onTap: () {
-                                      setState(() {
-                                        activeTabIndex = index;
-                                      });
-                                    },
-                                  ))),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: List.generate(
+                        tabList.length,
+                        (index) => TabWidget(
+                          tabIcon: tabList[index]['tabIcon'].toString(),
+                          tabLael: tabList[index]['tabLabel'].toString(),
+                          activeTab: activeTabIndex == index,
+                          onTap: () {
+                            setState(() {
+                              activeTabIndex = index;
+                            });
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            ActiveTabScreen(
+              activeTab: activeTabIndex,
+            )
+          ],
         ),
-        floatingActionButton: ElevatedButton.icon(
-          style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                      side: const BorderSide(color: Colors.blue)))),
-          onPressed: () {}, // TODO 1: Add FLOATING ACTION BUTTON functionn
-          // TODO 2: Change message Icon
-          icon: const Icon(Icons.message),
-          label: const Text(
-            "Start a conversation",
-          ),
-        ));
+      ),
+    );
+  }
+}
+
+class ActiveTabScreen extends StatelessWidget {
+  final int activeTab;
+  const ActiveTabScreen({Key? key, required this.activeTab}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    switch (activeTab) {
+      case 0:
+        return const ConversationPage();
+
+      case 1:
+        return const Text("Hey I am Trend");
+      case 2:
+        return const Text("Hey I am Video");
+      case 3:
+        return const ConversationPage();
+      default:
+        return Container(
+          child: Text("Hey"),
+        );
+    }
   }
 }
