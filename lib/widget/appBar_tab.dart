@@ -8,13 +8,24 @@ class TabWidget extends StatelessWidget {
   const TabWidget({
     Key? key,
     required this.tabIcon,
-    required this.tabLael, required this.activeTab,
+    required this.tabLael,
+    required this.activeTab,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.yellow,
+      decoration: BoxDecoration(
+        color: activeTab ? const Color(0xfffdf196) : Colors.white,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(30),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8,
+        ),
         child: Row(
           children: [
             SvgPicture.asset(
@@ -23,11 +34,24 @@ class TabWidget extends StatelessWidget {
               width: 24,
               color: Colors.black,
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            Text(tabLael)
+            activeTab
+                ? const SizedBox(
+                    width: 10,
+                  )
+                : Container(),
+            activeTab
+                ? Text(
+                    tabLael,
+                    style: const TextStyle(
+                      color: Color(0xffe63946),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+                  )
+                : Container(),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

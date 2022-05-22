@@ -60,26 +60,31 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(children: const [
-                        TabWidget(
-                            tabIcon: "assets/icons/ic_message.svg",
-                            tabLael: "Message", activeTab: false,),
-                        TabWidget(
-                            tabIcon: "assets/icons/ic_trend.svg",
-                            tabLael: "Trend",
-                          activeTab: false,
-                        ),
-                        TabWidget(
-                            tabIcon: "assets/icons/ic_video.svg",
-                            tabLael: "Video",
-                          activeTab: false,
-                        ),
-                        TabWidget(
-                            tabIcon: "assets/icons/ic_account_circle_icon.svg",
-                            tabLael: "Profile",
-                          activeTab: false,
-                        ),
-                      ]),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: const [
+                            TabWidget(
+                              tabIcon: "assets/icons/ic_message.svg",
+                              tabLael: "Conversation",
+                              activeTab: true,
+                            ),
+                            TabWidget(
+                              tabIcon: "assets/icons/ic_trend.svg",
+                              tabLael: "Trend",
+                              activeTab: false,
+                            ),
+                            TabWidget(
+                              tabIcon: "assets/icons/ic_video.svg",
+                              tabLael: "Video",
+                              activeTab: false,
+                            ),
+                            TabWidget(
+                              tabIcon:
+                                  "assets/icons/ic_account_circle_icon.svg",
+                              tabLael: "Profile",
+                              activeTab: false,
+                            ),
+                          ]),
                     ),
                   ),
                 ),
