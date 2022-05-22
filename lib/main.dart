@@ -116,9 +116,7 @@ class ActiveTabScreen extends StatelessWidget {
       case 3:
         return const Text("This is AccountPage");
       default:
-        return Container(
-          child: Text("Something went wrong! Restart the app"),
-        );
+        return const Text("Something went wrong! Restart the app");
     }
   }
 }
