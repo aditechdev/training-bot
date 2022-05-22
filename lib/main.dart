@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.blue)))),
+                        side: const BorderSide(color: Colors.blue)))),
             onPressed: () {},
             icon: const Icon(Icons.message),
             label: const Text("Start a conversation"))
