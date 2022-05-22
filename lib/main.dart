@@ -110,14 +110,14 @@ class ActiveTabScreen extends StatelessWidget {
         return const ConversationPage();
 
       case 1:
-        return const Text("Hey I am Trend");
+        return const Text("Trend Page Comming SOOON");
       case 2:
         return const Text("Hey I am Video");
       case 3:
-        return const ConversationPage();
+        return const Text("This is AccountPage");
       default:
         return Container(
-          child: Text("Hey"),
+          child: Text("Something went wrong! Restart the app"),
         );
     }
   }
