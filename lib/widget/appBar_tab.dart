@@ -9,7 +9,7 @@ class TabWidget extends StatelessWidget {
     Key? key,
     required this.tabIcon,
     required this.tabLael,
-    required this.activeTab,
+    this.activeTab = false,
   }) : super(key: key);
 
   @override

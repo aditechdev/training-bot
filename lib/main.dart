@@ -30,6 +30,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int activeTabIndex = 1;
+
+  List<Map<String, String>> tabList = [
+    {'tabIcon': "assets/icons/ic_message.svg", 'tabLabel': "Conversation"},
+    {'tabIcon': "assets/icons/ic_trend.svg", 'tabLabel': 'Trend'},
+    {'tabIcon': "assets/icons/ic_video.svg", 'tabLabel': 'Video'},
+    {
+      'tabIcon': "assets/icons/ic_account_circle_icon.svg",
+      'tabLabel': 'Account'
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,29 +74,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            TabWidget(
-                              tabIcon: "assets/icons/ic_message.svg",
-                              tabLael: "Conversation",
-                              activeTab: true,
-                            ),
-                            TabWidget(
-                              tabIcon: "assets/icons/ic_trend.svg",
-                              tabLael: "Trend",
-                              activeTab: false,
-                            ),
-                            TabWidget(
-                              tabIcon: "assets/icons/ic_video.svg",
-                              tabLael: "Video",
-                              activeTab: false,
-                            ),
-                            TabWidget(
-                              tabIcon:
-                                  "assets/icons/ic_account_circle_icon.svg",
-                              tabLael: "Profile",
-                              activeTab: false,
-                            ),
-                          ]),
+                          children: List.generate(
+                              tabList.length,
+                              (index) => TabWidget(
+                                  tabIcon: tabList[index]['tabIcon'].toString(),
+                                  tabLael:
+                                      tabList[index]['tabLabel'].toString(),
+                                  activeTab: activeTabIndex == index))),
                     ),
                   ),
                 ),
