@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int activeTabIndex = 1;
+  int activeTabIndex = 0;
 
   List<Map<String, String>> tabList = [
     {'tabIcon': "assets/icons/ic_message.svg", 'tabLabel': "Conversation"},
@@ -77,10 +77,17 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: List.generate(
                               tabList.length,
                               (index) => TabWidget(
-                                  tabIcon: tabList[index]['tabIcon'].toString(),
-                                  tabLael:
-                                      tabList[index]['tabLabel'].toString(),
-                                  activeTab: activeTabIndex == index))),
+                                    tabIcon:
+                                        tabList[index]['tabIcon'].toString(),
+                                    tabLael:
+                                        tabList[index]['tabLabel'].toString(),
+                                    activeTab: activeTabIndex == index,
+                                    onTap: () {
+                                      setState(() {
+                                        activeTabIndex = index;
+                                      });
+                                    },
+                                  ))),
                     ),
                   ),
                 ),
@@ -89,16 +96,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         floatingActionButton: ElevatedButton.icon(
-            style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                        side: const BorderSide(color: Colors.blue)))),
-            onPressed: () {}, // TODO 1: Add FLOATING ACTION BUTTON functionn
-            // TODO 2: Change message Icon
-            icon: const Icon(Icons.message),
-            label: const Text("Start a conversation"))
-        // ElevatedButton(onPressed: () {}, child: Text("data")),
-        );
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: const BorderSide(color: Colors.blue)))),
+          onPressed: () {}, // TODO 1: Add FLOATING ACTION BUTTON functionn
+          // TODO 2: Change message Icon
+          icon: const Icon(Icons.message),
+          label: const Text(
+            "Start a conversation",
+          ),
+        ));
   }
 }
