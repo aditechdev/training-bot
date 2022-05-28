@@ -18,7 +18,7 @@ class MessageModelAdapter extends TypeAdapter<MessageModel> {
     };
     return MessageModel(
       fields[0] as String,
-      fields[1] as ChattMessage,
+      (fields[1] as List).cast<ChattMessage>(),
       fields[3] as String,
       fields[2] as String,
       fields[4] as String,

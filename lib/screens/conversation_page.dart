@@ -22,22 +22,35 @@ class ConversationPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: 80,
                     child: const Center(
-                      child: Text(
-                        "The chat is empty",
-                      ),
-                    ),
+                        child: 
+                        // CnversationListWidget(
+                        //     // index: 1,
+                        //     )
+                        Text(
+                          "The chat is empty",
+                        ),
+                        ),
                   );
                 }
 
                 return SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: Column(
-                    children: List.generate(
-                      20,
-                      (index) => CnversationListWidget(
-                        index: index,
-                      ),
-                    ),
+                  child: ListView.builder(
+                    itemCount: box.length,
+                    itemBuilder: (BuildContext context, index) {
+                      MessageModel? messageListElement = box.getAt(index);
+                      return CnversationListWidget(
+                        mainImage:  messageListElement!.image,
+                      // color: "",
+                      date: messageListElement.chatMessage[0].date,
+                      lastConversation: messageListElement.chatMessage[0].message,
+                      roundLanguage: messageListElement.language,
+                      // smallDotColor: "",
+                      topic: messageListElement.topic,
+                      userName: messageListElement.chatMessage[0].userName,
+                          // index: index,
+                          );
+                    },
                   ),
                 );
               }),
@@ -69,24 +82,44 @@ class ConversationPage extends StatelessWidget {
 }
 
 class CnversationListWidget extends StatelessWidget {
-  final int index;
+  // final int index;
+  final String mainImage;
+  final String roundLanguage;
+  final String topic;
+  final String userName;
+  final String lastConversation;
+  // final String color;
+  final String date;
+  // final String smallDotColor;
+
   const CnversationListWidget({
     Key? key,
-    required this.index,
+    required this.mainImage,
+    required this.roundLanguage,
+    required this.topic,
+    required this.userName,
+    required this.lastConversation,
+    // required this.color,
+    required this.date,
+    // required this.smallDotColor,
+    // this.index = 19,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 16,
         left: 16,
         right: 16,
-        bottom: index == 19 ? 100 : 0,
+        // bottom: index == 19 ? 100 : 0,
+        // bottom: index == 19 ? 100 : 0,
       ),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Row(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Stack(
               clipBehavior: Clip.none,
@@ -98,14 +131,9 @@ class CnversationListWidget extends StatelessWidget {
                     color: Colors.red,
                     shape: BoxShape.circle,
                   ),
-                  child: const Center(
-                    child: Text(
-                      "IMG",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w700,
-                      ),
+                  child: Center(
+                    child: Image.asset(
+                      mainImage,
                     ),
                   ),
                 ),
@@ -119,10 +147,10 @@ class CnversationListWidget extends StatelessWidget {
                       color: Colors.green,
                       shape: BoxShape.circle,
                     ),
-                    child: const Center(
+                    child:  Center(
                       child: Text(
-                        "EN",
-                        style: TextStyle(
+                        roundLanguage,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
@@ -135,21 +163,22 @@ class CnversationListWidget extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text("Topic"),
-                        Text("Date"),
+                      children:  [
+                        Text(topic),
+                        Text(date),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text("User Name: Last Conversation"),
+                         Text("$userName: $lastConversation"),
                         Container(
                           height: 15,
                           width: 15,

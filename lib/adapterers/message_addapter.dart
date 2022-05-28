@@ -6,7 +6,7 @@ class MessageModel {
   @HiveField(0)
   String topic;
   @HiveField(1)
-  ChattMessage chatMessage;
+  List<ChattMessage> chatMessage;
   @HiveField(2)
   String language;
   @HiveField(3)
