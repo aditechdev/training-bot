@@ -31,121 +31,138 @@ class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
-      appBar: AppBar(
-        titleSpacing: 0,
-        foregroundColor: Colors.black,
-        title: Row(
-          children: [
-            InkWell(
-              onTap: () {
-                setState(() {
-                  boolShowMyLanguageList = !boolShowMyLanguageList;
-                });
-              },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "My Language",
-                    style: appBarTitleStyle,
-                  ),
-                  Text(
-                    selectMyLanguage,
-                    style: appBarTitleSelectableStyle,
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-            SvgPicture.asset("assets/icons/ic_double_arrow.svg",
-                color: Colors.blue),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-              child: InkWell(
+        backgroundColor: Colors.grey[300],
+        appBar: AppBar(
+          titleSpacing: 0,
+          foregroundColor: Colors.black,
+          title: Row(
+            children: [
+              InkWell(
                 onTap: () {
                   setState(() {
-                    boolShowLearningLanguageList =
-                        !boolShowLearningLanguageList;
+                    boolShowMyLanguageList = !boolShowMyLanguageList;
                   });
                 },
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "I am Learning",
+                      "My Language",
                       style: appBarTitleStyle,
                     ),
                     Text(
-                      selectLearningLanguage,
+                      selectMyLanguage,
                       style: appBarTitleSelectableStyle,
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
-        ),
-        backgroundColor: Colors.white,
-      ),
-      body: Stack(
-        children: [
-          Column(
-            children: const [
-              SizedBox(
-                height: 40,
+              const Spacer(),
+              SvgPicture.asset("assets/icons/ic_double_arrow.svg",
+                  color: Colors.blue),
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      boolShowLearningLanguageList =
+                          !boolShowLearningLanguageList;
+                    });
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const Text(
+                        "I am Learning",
+                        style: appBarTitleStyle,
+                      ),
+                      Text(
+                        selectLearningLanguage,
+                        style: appBarTitleSelectableStyle,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              MultiCircle(),
             ],
           ),
-          boolShowMyLanguageList
-              ? Positioned(
-                  left: 55,
-                  child: Column(
-                    children: List.generate(
-                      languageList.length,
-                      (index) => InkWell(
-                        onTap: () {
-                          setState(() {
-                            selectMyLanguage = languageList[index];
-                            boolShowMyLanguageList = false;
-                          });
-                        },
-                        child: DropDownLanguage(
-                          languageList: languageList,
-                          languageListText: languageList[index],
+          backgroundColor: Colors.white,
+        ),
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                Text(
+                  "Please Select My Language",
+                  style: TextStyle(
+                    color: Colors.red[300],
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                const MultiCircle(),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  "Bience",
+                  style: appBarTitleStyle,
+                )
+              ],
+            ),
+            boolShowMyLanguageList
+                ? Positioned(
+                    left: 55,
+                    child: Column(
+                      children: List.generate(
+                        languageList.length,
+                        (index) => InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectMyLanguage = languageList[index];
+                              boolShowMyLanguageList = false;
+                            });
+                          },
+                          child: DropDownLanguage(
+                            languageList: languageList,
+                            languageListText: languageList[index],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              : Container(),
-          boolShowLearningLanguageList
-              ? Positioned(
-                  right: 10,
-                  child: Column(
-                    children: List.generate(
-                      languageList.length,
-                      (index) => InkWell(
-                        onTap: () {
-                          setState(() {
-                            selectLearningLanguage = languageList[index];
-                            boolShowLearningLanguageList = false;
-                          });
-                        },
-                        child: DropDownLanguage(
-                          languageList: languageList,
-                          languageListText: languageList[index],
+                  )
+                : Container(),
+            boolShowLearningLanguageList
+                ? Positioned(
+                    right: 10,
+                    child: Column(
+                      children: List.generate(
+                        languageList.length,
+                        (index) => InkWell(
+                          onTap: () {
+                            setState(() {
+                              selectLearningLanguage = languageList[index];
+                              boolShowLearningLanguageList = false;
+                            });
+                          },
+                          child: DropDownLanguage(
+                            languageList: languageList,
+                            languageListText: languageList[index],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              : Container()
-        ],
-      ),
-    );
+                  )
+                : Container()
+          ],
+        ),
+        floatingActionButton: ElevatedButton.icon(
+          onPressed: () {},
+          icon: const Icon(Icons.send),
+          label: Text("STart".toUpperCase()),
+        ));
   }
 }
 

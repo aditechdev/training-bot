@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:training/adapterers/message_addapter.dart';
 
 class ConversationPage extends StatelessWidget {
   const ConversationPage({Key? key}) : super(key: key);
@@ -11,17 +13,34 @@ class ConversationPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: List.generate(
-                20,
-                (index) => CnversationListWidget(
-                  index: index,
-                ),
-              ),
-            ),
-          ),
+          ValueListenableBuilder(
+              valueListenable:
+                  Hive.box<MessageModel>('messageModel').listenable(),
+              builder: (BuildContext context, Box<MessageModel> box, _) {
+                if (box.values.isEmpty) {
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 80,
+                    child: const Center(
+                      child: Text(
+                        "The chat is empty",
+                      ),
+                    ),
+                  );
+                }
+
+                return SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    children: List.generate(
+                      20,
+                      (index) => CnversationListWidget(
+                        index: index,
+                      ),
+                    ),
+                  ),
+                );
+              }),
           Positioned(
             bottom: 30,
             right: 40,
@@ -36,8 +55,7 @@ class ConversationPage extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.pushNamed(context, "startNewMessageScreen");
-              }, // TODO 1: Add FLOATING ACTION BUTTON functionn
-              // TODO 2: Change message Icon
+              },
               icon: const Icon(Icons.message),
               label: const Text(
                 "Start a conversation",

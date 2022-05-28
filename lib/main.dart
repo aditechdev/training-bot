@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:training/adapterers/message_addapter.dart';
 import 'package:training/screens/conversation_page.dart';
 import 'package:training/screens/start_new_message.dart';
 import 'package:training/widget/appBar_tab.dart';
 
-void main() {
+ main() async {
+   await Hive.initFlutter();
+  //  Hive.registerAdapter(TodoAdapter());
+   await Hive.openBox<MessageModel>('messageModel');
   runApp(const MyApp());
 }
 
@@ -21,7 +27,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
 
-        "startNewMessageScreen": (context) =>StartNewMessageScreen()
+        "startNewMessageScreen": (context) =>const StartNewMessageScreen()
 
 
       },
