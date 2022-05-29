@@ -6,15 +6,13 @@ class MessageModel {
   @HiveField(0)
   String topic;
   @HiveField(1)
-  List<ChattMessage> chatMessage;
+  String chatID;
   @HiveField(2)
   String language;
-  @HiveField(3)
-  String color;
   @HiveField(4)
   String image;
 
-  MessageModel(this.topic, this.chatMessage, this.color, this.language, this.image);
+  MessageModel(this.topic,this.chatID, this.language, this.image);
 }
 
 @HiveType(typeId: 1)
@@ -27,11 +25,14 @@ class ChattMessage {
   String date;
   @HiveField(3)
   String userName;
+  @HiveField(4)
+  String chatID;
 
   ChattMessage(
     this.bot,
     this.message,
     this.date,
     this.userName,
+    this.chatID
   );
 }

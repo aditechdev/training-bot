@@ -6,6 +6,8 @@ import 'package:training/screens/conversation_page.dart';
 import 'package:training/screens/start_new_message.dart';
 import 'package:training/widget/appBar_tab.dart';
 
+import 'screens/chat_screen.dart';
+
  main() async {
    await Hive.initFlutter();
   //  Hive.registerAdapter(TodoAdapter());
@@ -27,7 +29,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
 
-        "startNewMessageScreen": (context) =>const StartNewMessageScreen()
+        "startNewMessageScreen": (context) =>const StartNewMessageScreen(),
+        "chatScreen": (context) =>const ChatScreen()
 
 
       },

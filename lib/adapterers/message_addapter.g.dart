@@ -18,8 +18,7 @@ class MessageModelAdapter extends TypeAdapter<MessageModel> {
     };
     return MessageModel(
       fields[0] as String,
-      (fields[1] as List).cast<ChattMessage>(),
-      fields[3] as String,
+      fields[1] as String,
       fields[2] as String,
       fields[4] as String,
     );
@@ -28,15 +27,13 @@ class MessageModelAdapter extends TypeAdapter<MessageModel> {
   @override
   void write(BinaryWriter writer, MessageModel obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.topic)
       ..writeByte(1)
-      ..write(obj.chatMessage)
+      ..write(obj.chatID)
       ..writeByte(2)
       ..write(obj.language)
-      ..writeByte(3)
-      ..write(obj.color)
       ..writeByte(4)
       ..write(obj.image);
   }
@@ -67,13 +64,14 @@ class ChattMessageAdapter extends TypeAdapter<ChattMessage> {
       fields[0] as String,
       fields[2] as String,
       fields[3] as String,
+      fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ChattMessage obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.message)
       ..writeByte(1)
@@ -81,7 +79,9 @@ class ChattMessageAdapter extends TypeAdapter<ChattMessage> {
       ..writeByte(2)
       ..write(obj.date)
       ..writeByte(3)
-      ..write(obj.userName);
+      ..write(obj.userName)
+      ..writeByte(4)
+      ..write(obj.chatID);
   }
 
   @override

@@ -184,7 +184,14 @@ class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
           ],
         ),
         floatingActionButton: ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, "chatScreen",
+                arguments: {
+                  "learningLanguage": selectLearningLanguage, 
+                  "topic": scrollImage[selectedIndex]['label'].toString(),
+                  "image": scrollImage[selectedIndex]['image'].toString()
+                });
+          },
           icon: const Icon(Icons.send),
           label: Text("STart".toUpperCase()),
         ));

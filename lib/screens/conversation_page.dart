@@ -42,12 +42,12 @@ class ConversationPage extends StatelessWidget {
                       return CnversationListWidget(
                         mainImage:  messageListElement!.image,
                       // color: "",
-                      date: messageListElement.chatMessage[0].date,
-                      lastConversation: messageListElement.chatMessage[0].message,
+                      date: "messageListElement.chatMessage[0].date",
+                      lastConversation: "messageListElement.chatMessage[0].message",
                       roundLanguage: messageListElement.language,
                       // smallDotColor: "",
                       topic: messageListElement.topic,
-                      userName: messageListElement.chatMessage[0].userName,
+                      userName: "messageListElement.chatMessage[0].userName",
                           // index: index,
                           );
                     },
