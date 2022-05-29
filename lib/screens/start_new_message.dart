@@ -13,7 +13,7 @@ class StartNewMessageScreen extends StatefulWidget {
 class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
   bool boolShowMyLanguageList = false;
   bool boolShowLearningLanguageList = false;
-  var uuid = Uuid();
+  var uuid = const Uuid();
 
   List languageList = [
     "English",

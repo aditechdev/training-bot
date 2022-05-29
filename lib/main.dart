@@ -8,12 +8,14 @@ import 'package:training/widget/appBar_tab.dart';
 
 import 'screens/chat_screen.dart';
 
+const String channelBoxName = "channelModel";
+const String chatBoxName = "chatModel";
 main() async {
   await Hive.initFlutter();
-   Hive.registerAdapter(MessageModelAdapter());
-   Hive.registerAdapter(ChattMessageAdapter());
-  await Hive.openBox<MessageModel>('messageModel');
-  await Hive.openBox<ChattMessage>('chatMessagePDL');
+  Hive.registerAdapter(ChannelModelAdapter());
+  Hive.registerAdapter(ChatMessageModelAdapter());
+  await Hive.openBox<ChannelModel>(channelBoxName);
+  await Hive.openBox<ChatMessageModel>(chatBoxName);
   runApp(const MyApp());
 }
 

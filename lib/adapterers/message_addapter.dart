@@ -2,37 +2,34 @@ import 'package:hive/hive.dart';
 part 'message_addapter.g.dart';
 
 @HiveType(typeId: 0)
-class MessageModel { // TODO Channel Model
+class ChannelModel {
   @HiveField(0)
   String topic;
   @HiveField(1)
-  String chatID; // TODO Change to Channel ID
+  String channelID;
   @HiveField(2)
   String language;
-  @HiveField(4)
-  String image;  
+  @HiveField(3)
+  String channelImage;
 
-  MessageModel(this.topic,this.chatID, this.language, this.image);
+  ChannelModel(this.topic, this.channelID, this.language, this.channelImage);
 }
 
 @HiveType(typeId: 1)
-class ChattMessage { 
+class ChatMessageModel {
   @HiveField(0)
   String message;
   @HiveField(1)
-  bool bot;
+  bool isBot;
   @HiveField(2)
   String date;
   @HiveField(3)
   String userName;
   @HiveField(4)
+  String channelID;
+  @HiveField(5)
   String chatID;
 
-  ChattMessage(
-    this.bot,
-    this.message,
-    this.date,
-    this.userName,
-    this.chatID
-  );
+  ChatMessageModel(this.isBot, this.message, this.date, this.userName, this.channelID,
+      this.chatID);
 }

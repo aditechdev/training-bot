@@ -4,6 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:training/adapterers/message_addapter.dart';
+import 'package:training/main.dart';
+import 'package:uuid/uuid.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -17,8 +19,9 @@ class _ChatScreenState extends State<ChatScreen> {
   String selectedTitle = " ";
   TextEditingController messageController = TextEditingController();
   String image = " ";
-  String uuid = " ";
+  String channelID = " ";
   bool createChannel = false;
+  var uuid = const Uuid();
   @override
   void initState() {
     // Map a = ModalRoute.of(ctxt).settings.arguments as Map;
@@ -44,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
     selectedLanguage = a["learningLanguage"];
     selectedTitle = a["topic"];
     image = a["image"];
-    uuid = a["uuid"];
+    channelID = a["uuid"];
     createChannel = a["fromCreaterScreen"];
     // });
 
@@ -85,25 +88,36 @@ class _ChatScreenState extends State<ChatScreen> {
                     suffixIcon: InkWell(
                         onTap: () {
                           if (messageController.text.isNotEmpty) {
+                            var chatID = uuid.v1();
                             if (createChannel) {
-                              Box<MessageModel> messageBox =
-                                  Hive.box<MessageModel>("messageModel");
+                              Box<ChannelModel> messageBox =
+                                  Hive.box<ChannelModel>(channelBoxName);
 
-                              messageBox.add(MessageModel(selectedTitle, uuid,
+                              messageBox.add(ChannelModel(selectedTitle, channelID,
                                   selectedLanguage, image));
                             }
 
-                            
-
                             // Create Message box
-                            Box<ChattMessage> chatBox =
-                                Hive.box<ChattMessage>("chatMessagePDL");
+                            Box<ChatMessageModel> chatBox =
+                                Hive.box<ChatMessageModel>(chatBoxName);
 
-                            chatBox.add(ChattMessage(false, messageController.text, DateTime.now().toIso8601String(), "Aditya Anand", uuid));
+                            chatBox.add(ChatMessageModel(
+                                false,
+                                messageController.text,
+                                DateTime.now()
+                                    .millisecondsSinceEpoch
+                                    .toString(),
+                                "Aditya Anand",
+                                channelID,
+                                chatID));
 
-
+                            // chatBox.add(ChatMessageModel(
+                            //     false,
+                            //     messageController.text,
+                            //     DateTime.now().toIso8601String(),
+                            //     "Aditya Anand",
+                            //     uuid));
                           }
-                          
                         },
                         child: const Icon(Icons.send, color: Colors.white)),
                   ),

@@ -16,17 +16,15 @@ class ConversationPage extends StatelessWidget {
         children: [
           ValueListenableBuilder(
               valueListenable:
-                  Hive.box<MessageModel>('messageModel').listenable(),
-              builder: (BuildContext context, Box<MessageModel> box, _) {
+                  Hive.box<ChannelModel>('channelModel').listenable(),
+              builder: (BuildContext context, Box<ChannelModel> box, _) {
                 if (box.values.isEmpty) {
                   return SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 80,
                     child: const Center(
                       child:
-                          // CnversationListWidget(
-                          //     // index: 1,
-                          //     )
+                         
                           Text(
                         "The chat is empty",
                       ),
@@ -36,21 +34,24 @@ class ConversationPage extends StatelessWidget {
 
                 return ValueListenableBuilder(
                     valueListenable:
-                        Hive.box<ChattMessage>('chatMessagePDL').listenable(),
+                        Hive.box<ChatMessageModel>('chatMessagePDL').listenable(),
                     builder: (BuildContext context,
-                        Box<ChattMessage> messageBox, _) {
+                        Box<ChatMessageModel> messageBox, _) {
                       return ListView.builder(
                         itemCount: messageBox.length,
                         itemBuilder: (BuildContext context, index) {
-                          MessageModel? messageListElement = box.getAt(index);
+                          ChannelModel? messageListElement = box.getAt(index);
+
                           // ChattMessage? chatMessageList = messageBox;
-                          Iterable<ChattMessage> chatMessageList = messageBox.values.where((element) => element.chatID == messageListElement?.chatID);
+                          // Iterable<ChatMessageModel> chatMessageList =
+                          //     messageBox.values.where((element) =>
+                          //         element.chatID == messageListElement?.chatID);
                           // messageBox.get(messageListElement?.chatID);
 
                           DateFormat dateFormat = DateFormat('dd MM yyyy');
 
                           return CnversationListWidget(
-                            mainImage: messageListElement!.image,
+                            mainImage: messageListElement!.channelImage,
                             // color: "",
                             date: " dd",
                             //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
@@ -59,8 +60,7 @@ class ConversationPage extends StatelessWidget {
                                 messageListElement.language.substring(0, 2),
                             // smallDotColor: "",
                             topic: messageListElement.topic,
-                            userName: 
-                            // " UseName",
+                            userName: "UseName",
                             //  messageBox.values.firstWhere((element) => element.chatID == messageListElement.chatID ).userName,
                             // index: index,
                           );
