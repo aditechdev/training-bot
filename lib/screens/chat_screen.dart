@@ -17,6 +17,8 @@ class _ChatScreenState extends State<ChatScreen> {
   String selectedTitle = " ";
   TextEditingController messageController = TextEditingController();
   String image = " ";
+  String uuid = " ";
+  bool createChannel = false;
   @override
   void initState() {
     // Map a = ModalRoute.of(ctxt).settings.arguments as Map;
@@ -42,13 +44,11 @@ class _ChatScreenState extends State<ChatScreen> {
     selectedLanguage = a["learningLanguage"];
     selectedTitle = a["topic"];
     image = a["image"];
+    uuid = a["uuid"];
+    createChannel = a["fromCreaterScreen"];
     // });
 
     super.didChangeDependencies();
-  }
-
-  void printMessage() {
-    print("okkk");
   }
 
   sendMessage() {
@@ -84,19 +84,21 @@ class _ChatScreenState extends State<ChatScreen> {
                     filled: true,
                     suffixIcon: InkWell(
                         onTap: () {
-                        
-                          Box<MessageModel> messageBox =
-                              Hive.box<MessageModel>("messageModel");
-                          // messageBox.add(MessageModel(selectedTitle,
-                          //     ChattMessage(false,), "ok", selectedLanguage, image));
-                          // messageBox.add(MessageModel(topic: selectedTitle , chatMessage: , color: "okoko", language:selectedLanguage , image:image ));
-                          // // todoBox.add(
-                          //     MessageModel(title: title, discription: description));
-                        },
-                        child: Icon(Icons.send, color: Colors.white)),
-                    // Icon(Icons.send, color: Colors.white),
+                          if (messageController.text.isNotEmpty) {
+                            if (createChannel) {
+                              Box<MessageModel> messageBox =
+                                  Hive.box<MessageModel>("messageModel");
 
-                    // hintStyle: Style.chatTextStyle.copyWith(fontSize: 12)),
+                              messageBox.add(MessageModel(selectedTitle, uuid,
+                                  selectedLanguage, image));
+                            }
+
+                            // Create Message box
+
+                          }
+                          
+                        },
+                        child: const Icon(Icons.send, color: Colors.white)),
                   ),
                 ),
               )

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:training/const/newMessage_style.dart';
+import 'package:uuid/uuid.dart';
 
 class StartNewMessageScreen extends StatefulWidget {
   const StartNewMessageScreen({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class StartNewMessageScreen extends StatefulWidget {
 class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
   bool boolShowMyLanguageList = false;
   bool boolShowLearningLanguageList = false;
+  var uuid = Uuid();
 
   List languageList = [
     "English",
@@ -185,12 +187,15 @@ class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
         ),
         floatingActionButton: ElevatedButton.icon(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, "chatScreen",
-                arguments: {
-                  "learningLanguage": selectLearningLanguage, 
-                  "topic": scrollImage[selectedIndex]['label'].toString(),
-                  "image": scrollImage[selectedIndex]['image'].toString()
-                });
+            var v1 = uuid.v1();
+            
+            Navigator.pushReplacementNamed(context, "chatScreen", arguments: {
+              "learningLanguage": selectLearningLanguage,
+              "topic": scrollImage[selectedIndex]['label'].toString(),
+              "image": scrollImage[selectedIndex]['image'].toString(),
+              "uuid": v1, 
+              "fromCreaterScreen": true
+            });
           },
           icon: const Icon(Icons.send),
           label: Text("STart".toUpperCase()),

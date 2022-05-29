@@ -22,36 +22,34 @@ class ConversationPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: 80,
                     child: const Center(
-                        child: 
-                        // CnversationListWidget(
-                        //     // index: 1,
-                        //     )
-                        Text(
-                          "The chat is empty",
-                        ),
-                        ),
+                      child:
+                          // CnversationListWidget(
+                          //     // index: 1,
+                          //     )
+                          Text(
+                        "The chat is empty",
+                      ),
+                    ),
                   );
                 }
 
-                return SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: ListView.builder(
-                    itemCount: box.length,
-                    itemBuilder: (BuildContext context, index) {
-                      MessageModel? messageListElement = box.getAt(index);
-                      return CnversationListWidget(
-                        mainImage:  messageListElement!.image,
+                return ListView.builder(
+                  itemCount: box.length,
+                  itemBuilder: (BuildContext context, index) {
+                    MessageModel? messageListElement = box.getAt(index);
+                    return CnversationListWidget(
+                      mainImage: messageListElement!.image,
                       // color: "",
-                      date: "messageListElement.chatMessage[0].date",
-                      lastConversation: "messageListElement.chatMessage[0].message",
-                      roundLanguage: messageListElement.language,
+                      date: "date",
+                      lastConversation: ".message",
+                      roundLanguage:
+                          messageListElement.language.substring(0, 2),
                       // smallDotColor: "",
                       topic: messageListElement.topic,
-                      userName: "messageListElement.chatMessage[0].userName",
-                          // index: index,
-                          );
-                    },
-                  ),
+                      userName: "userName",
+                      // index: index,
+                    );
+                  },
                 );
               }),
           Positioned(
@@ -124,16 +122,22 @@ class CnversationListWidget extends StatelessWidget {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                Container(
-                  height: 50,
-                  width: 50,
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Image.asset(
-                      mainImage,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Image.asset(
+                        mainImage,
+                        height: 50,
+                        width: 50,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
@@ -147,7 +151,7 @@ class CnversationListWidget extends StatelessWidget {
                       color: Colors.green,
                       shape: BoxShape.circle,
                     ),
-                    child:  Center(
+                    child: Center(
                       child: Text(
                         roundLanguage,
                         style: const TextStyle(
@@ -170,7 +174,7 @@ class CnversationListWidget extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children:  [
+                      children: [
                         Text(topic),
                         Text(date),
                       ],
@@ -178,7 +182,7 @@ class CnversationListWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text("$userName: $lastConversation"),
+                        Text("$userName: $lastConversation"),
                         Container(
                           height: 15,
                           width: 15,

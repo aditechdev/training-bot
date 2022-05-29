@@ -8,10 +8,12 @@ import 'package:training/widget/appBar_tab.dart';
 
 import 'screens/chat_screen.dart';
 
- main() async {
-   await Hive.initFlutter();
-  //  Hive.registerAdapter(TodoAdapter());
-   await Hive.openBox<MessageModel>('messageModel');
+main() async {
+  await Hive.initFlutter();
+   Hive.registerAdapter(MessageModelAdapter());
+   Hive.registerAdapter(ChattMessageAdapter());
+  await Hive.openBox<MessageModel>('messageModel');
+  await Hive.openBox<ChattMessage>('chatMessagePDL');
   runApp(const MyApp());
 }
 
@@ -28,11 +30,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-
-        "startNewMessageScreen": (context) =>const StartNewMessageScreen(),
-        "chatScreen": (context) =>const ChatScreen()
-
-
+        "startNewMessageScreen": (context) => const StartNewMessageScreen(),
+        "chatScreen": (context) => const ChatScreen()
       },
       home: const MyHomePage(),
     );
