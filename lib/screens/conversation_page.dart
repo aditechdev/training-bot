@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:intl/intl.dart';
 import 'package:training/adapterers/message_addapter.dart';
 
 class ConversationPage extends StatelessWidget {
@@ -33,24 +34,39 @@ class ConversationPage extends StatelessWidget {
                   );
                 }
 
-                return ListView.builder(
-                  itemCount: box.length,
-                  itemBuilder: (BuildContext context, index) {
-                    MessageModel? messageListElement = box.getAt(index);
-                    return CnversationListWidget(
-                      mainImage: messageListElement!.image,
-                      // color: "",
-                      date: "date",
-                      lastConversation: ".message",
-                      roundLanguage:
-                          messageListElement.language.substring(0, 2),
-                      // smallDotColor: "",
-                      topic: messageListElement.topic,
-                      userName: "userName",
-                      // index: index,
-                    );
-                  },
-                );
+                return ValueListenableBuilder(
+                    valueListenable:
+                        Hive.box<ChattMessage>('chatMessagePDL').listenable(),
+                    builder: (BuildContext context,
+                        Box<ChattMessage> messageBox, _) {
+                      return ListView.builder(
+                        itemCount: messageBox.length,
+                        itemBuilder: (BuildContext context, index) {
+                          MessageModel? messageListElement = box.getAt(index);
+                          // ChattMessage? chatMessageList = messageBox;
+                          Iterable<ChattMessage> chatMessageList = messageBox.values.where((element) => element.chatID == messageListElement?.chatID);
+                          // messageBox.get(messageListElement?.chatID);
+
+                          DateFormat dateFormat = DateFormat('dd MM yyyy');
+
+                          return CnversationListWidget(
+                            mainImage: messageListElement!.image,
+                            // color: "",
+                            date: " dd",
+                            //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
+                            lastConversation: "chat Message",
+                            roundLanguage:
+                                messageListElement.language.substring(0, 2),
+                            // smallDotColor: "",
+                            topic: messageListElement.topic,
+                            userName: 
+                            // " UseName",
+                            //  messageBox.values.firstWhere((element) => element.chatID == messageListElement.chatID ).userName,
+                            // index: index,
+                          );
+                        },
+                      );
+                    });
               }),
           Positioned(
             bottom: 30,

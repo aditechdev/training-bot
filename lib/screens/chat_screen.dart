@@ -93,7 +93,14 @@ class _ChatScreenState extends State<ChatScreen> {
                                   selectedLanguage, image));
                             }
 
+                            
+
                             // Create Message box
+                            Box<ChattMessage> chatBox =
+                                Hive.box<ChattMessage>("chatMessagePDL");
+
+                            chatBox.add(ChattMessage(false, messageController.text, DateTime.now().toIso8601String(), "Aditya Anand", uuid));
+
 
                           }
                           
