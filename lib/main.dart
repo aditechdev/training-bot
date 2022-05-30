@@ -10,11 +10,7 @@ import 'screens/chat_screen.dart';
 const String channelBoxName = "channelModel";
 const String chatBoxName = "chatModel";
 main() async {
-  
-  await chatBloc.openBox(
-
-
-  );
+  await chatBloc.openBox();
   runApp(const MyApp());
 }
 
@@ -30,14 +26,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      
       initialRoute: "/homePage",
       routes: {
         "/homePage": (context) => const MyHomePage(),
         "startNewMessageScreen": (context) => const StartNewMessageScreen(),
         "chatScreen": (context) => const ChatScreen()
       },
-      home: const MyHomePage(),
     );
   }
 }
