@@ -37,8 +37,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
     // });
 
-    
-
     super.initState();
   }
 
@@ -69,77 +67,107 @@ class _ChatScreenState extends State<ChatScreen> {
         appBar: AppBar(
           title: Text(selectedTitle),
         ),
-        body: Container(
-          child: Stack(
-            children: [
-              StreamBuilder<List<ChatMessageModel>>(
+        body: Column(
+          children: [
+            const SizedBox(
+              height: 16,
+            ),
+            Expanded(
+              child: StreamBuilder<List<ChatMessageModel>>(
                   stream: chatBloc.getChats,
                   builder: (context, snapshot) {
-                    List<ChatMessageModel> channelMessageList =  chatBloc.fetchCurrentChannelMessages(channelID).toList();
+                    List<ChatMessageModel> channelMessageList = chatBloc
+                        .fetchCurrentChannelMessages(channelID)
+                        .toList();
                     return ListView.builder(
+                        reverse: true,
                         itemCount: channelMessageList.length,
                         itemBuilder: (BuildContext context, index) {
-                          return Text(channelMessageList[index].message);
+                          final chatMessageData = channelMessageList[index];
+                          return ChatBubble(
+                            chatMessage: chatMessageData.message,
+                            isBot: chatMessageData.isBot,
+                          );
                         });
                   }),
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: TextFormField(
-                  // style: Style.chatTextStyle
-                  // .copyWith(color: Theme.activeTextColor, fontSize: 14),
-                  controller: messageController,
-                  // onFieldSubmitted: (String text) => onSubmit(),
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: TextFormField(
+                // style: Style.chatTextStyle
+                // .copyWith(color: Theme.activeTextColor, fontSize: 14),
+                controller: messageController,
+                // onFieldSubmitted: (String text) => onSubmit(),
 
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Type Here",
-                    fillColor: Colors.black38,
-                    filled: true,
-                    suffixIcon: InkWell(
-                        onTap: () {
-                          if (messageController.text.isNotEmpty) {
-                            var chatID = uuid.v1();
-                            if (createChannel) {
-                              //  Create Channel
-                              chatBloc.createChannel(selectedTitle, channelID,
-                                  selectedLanguage, image);
-                            }
-
-                            // Create Message box
-                            chatBloc.createChat(
-                                false,
-                                messageController.text,
-                                DateTime.now()
-                                    .millisecondsSinceEpoch
-                                    .toString(),
-                                "Aditya Anand",
-                                channelID,
-                                chatID);
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Type Here",
+                  fillColor: Colors.black38,
+                  filled: true,
+                  suffixIcon: InkWell(
+                      onTap: () {
+                        if (messageController.text.isNotEmpty) {
+                          var chatID = uuid.v1();
+                          if (createChannel) {
+                            //  Create Channel
+                            chatBloc.createChannel(selectedTitle, channelID,
+                                selectedLanguage, image);
                           }
-                        },
-                        child: const Icon(Icons.send, color: Colors.white)),
-                  ),
+
+                          // Create Message box
+                          chatBloc.createChat(
+                              false,
+                              messageController.text,
+                              DateTime.now().millisecondsSinceEpoch.toString(),
+                              "Aditya Anand",
+                              channelID,
+                              chatID);
+                        }
+                      },
+                      child: const Icon(Icons.send, color: Colors.white)),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ));
   }
 }
 
-class NewWidget extends StatelessWidget {
-  final String text;
-  const NewWidget({
+class ChatBubble extends StatelessWidget {
+  final String chatMessage;
+  final bool isBot;
+  const ChatBubble({
     Key? key,
-    this.text = "",
+    required this.chatMessage,
+    this.isBot = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      (text == "") ? "data" : text,
-      style: TextStyle(
-        fontSize: 50,
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 16,
+        left: 16,
+        right: 16,
+      ),
+      child: Container(
+        color: Colors.blue[600],
+        alignment: isBot ? Alignment.centerLeft : Alignment.centerRight,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 16,
+            right: 16,
+            bottom: 16,
+            left: 16,
+          ),
+          child: Text(
+            chatMessage,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }
