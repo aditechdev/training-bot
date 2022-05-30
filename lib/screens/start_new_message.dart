@@ -188,12 +188,12 @@ class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
         floatingActionButton: ElevatedButton.icon(
           onPressed: () {
             var v1 = uuid.v1();
-            
+
             Navigator.pushReplacementNamed(context, "chatScreen", arguments: {
               "learningLanguage": selectLearningLanguage,
               "topic": scrollImage[selectedIndex]['label'].toString(),
               "image": scrollImage[selectedIndex]['image'].toString(),
-              "channelID": v1, 
+              "channelID": v1,
               "fromCreaterScreen": true
             });
           },

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:training/adapterers/message_addapter.dart';
 import 'package:training/chat_bloc.dart';
@@ -21,18 +20,6 @@ class _ChatScreenState extends State<ChatScreen> {
   var uuid = const Uuid();
   @override
   void initState() {
-    // Map a = ModalRoute.of(ctxt).settings.arguments as Map;
-    // if (a != null) {
-    //   clickedIndex = a["clickedIndex"];
-    //   if (mounted && clickedIndex != null) {
-    //     Future.delayed(const Duration(milliseconds: 100), () {
-    //       itemscrollController.jumpTo(index: clickedIndex, alignment: 0);
-    //     });
-    //   }
-    // }
-
-    // });
-
     super.initState();
   }
 
