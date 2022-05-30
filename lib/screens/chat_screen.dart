@@ -47,7 +47,7 @@ class _ChatScreenState extends State<ChatScreen> {
     selectedLanguage = a["learningLanguage"];
     selectedTitle = a["topic"];
     image = a["image"];
-    channelID = a["uuid"];
+    channelID = a["channelID"];
     createChannel = a["fromCreaterScreen"];
     // });
 

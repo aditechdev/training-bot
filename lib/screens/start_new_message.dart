@@ -193,7 +193,7 @@ class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
               "learningLanguage": selectLearningLanguage,
               "topic": scrollImage[selectedIndex]['label'].toString(),
               "image": scrollImage[selectedIndex]['image'].toString(),
-              "uuid": v1, 
+              "channelID": v1, 
               "fromCreaterScreen": true
             });
           },

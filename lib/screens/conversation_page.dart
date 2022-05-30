@@ -41,15 +41,22 @@ class ConversationPage extends StatelessWidget {
                         chatBloc.fetchLastMessage(channelData.channelID);
 
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, "chatScreen", arguments: {
+                          "learningLanguage": channelData.language,
+                          "topic": channelData.topic,
+                          "image": channelData.channelImage,
+                          "channelID": channelData.channelID,
+                          "fromCreaterScreen": false
+                        });
+                      },
                       child: CnversationListWidget(
                         mainImage: channelData.channelImage,
-                        // color: "",
                         date: " dd",
                         //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
                         lastConversation: chatData.message,
                         roundLanguage: channelData.language.substring(0, 2),
-                        // smallDotColor: "",
+
                         topic: channelData.topic,
                         userName: chatData.userName,
                       ),
