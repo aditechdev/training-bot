@@ -37,20 +37,22 @@ class ConversationPage extends StatelessWidget {
                     // DateFormat dateFormat = DateFormat('dd MM yyyy');
 
                     final channelData = snapshot.data![index];
-                    final chatData =chatBloc.fetchLastMessage(channelData.channelID);
+                    final chatData =
+                        chatBloc.fetchLastMessage(channelData.channelID);
 
-                    return CnversationListWidget(
-                      mainImage: channelData.channelImage,
-                      // color: "",
-                      date: " dd",
-                      //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
-                      lastConversation: chatData.message,
-                      roundLanguage: channelData.language.substring(0, 2),
-                      // smallDotColor: "",
-                      topic: channelData.topic,
-                      userName: chatData?.userName ?? " ",
-                      //  messageBox.values.firstWhere((element) => element.chatID == messageListElement.chatID ).userName,
-                      // index: index,
+                    return InkWell(
+                      onTap: () {},
+                      child: CnversationListWidget(
+                        mainImage: channelData.channelImage,
+                        // color: "",
+                        date: " dd",
+                        //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
+                        lastConversation: chatData.message,
+                        roundLanguage: channelData.language.substring(0, 2),
+                        // smallDotColor: "",
+                        topic: channelData.topic,
+                        userName: chatData.userName,
+                      ),
                     );
                   },
                 );
