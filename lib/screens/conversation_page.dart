@@ -26,14 +26,6 @@ class ConversationPage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, index) {
-                    // ChannelModel? messageListElement = box.getAt(index);
-
-                    // ChattMessage? chatMessageList = messageBox;
-                    // Iterable<ChatMessageModel> chatMessageList =
-                    //     messageBox.values.where((element) =>
-                    //         element.chatID == messageListElement?.chatID);
-                    // messageBox.get(messageListElement?.chatID);
-
                     // DateFormat dateFormat = DateFormat('dd MM yyyy');
 
                     final channelData = snapshot.data![index];
