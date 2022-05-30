@@ -87,6 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           return ChatBubble(
                             chatMessage: chatMessageData.message,
                             isBot: chatMessageData.isBot,
+                            createdAt: chatMessageData.date,
                           );
                         });
                   }),
@@ -136,10 +137,12 @@ class _ChatScreenState extends State<ChatScreen> {
 class ChatBubble extends StatelessWidget {
   final String chatMessage;
   final bool isBot;
+  final String createdAt;
   const ChatBubble({
     Key? key,
     required this.chatMessage,
     this.isBot = false,
+    required this.createdAt,
   }) : super(key: key);
 
   @override
@@ -160,12 +163,25 @@ class ChatBubble extends StatelessWidget {
             bottom: 16,
             left: 16,
           ),
-          child: Text(
-            chatMessage,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.white,
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                chatMessage,
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                createdAt,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
         ),
       ),
