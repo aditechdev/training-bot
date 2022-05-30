@@ -25,7 +25,7 @@ class ChatBloc {
   }
 
   List<ChatMessageModel> fetchCurrentChannelMessages(String channelID) {
-      List<ChatMessageModel> _temp = _chats.stream.value;
+    List<ChatMessageModel> _temp = _chats.stream.value;
 
     return _temp.where((element) => element.channelID == channelID).toList();
   }
@@ -34,6 +34,24 @@ class ChatBloc {
     List<ChatMessageModel> _temp = _chats.stream.value;
 
     return _temp.lastWhere((element) => element.channelID == channelID);
+  }
+
+  createChannel(String title, channelID, selectedLanguage, image) {
+    Box<ChannelModel> messageBox = Hive.box<ChannelModel>(channelBoxName);
+
+    messageBox.add(ChannelModel(title, channelID, selectedLanguage, image));
+  }
+
+  createChat(bool isBot, String message, String createdAt,String userName, String channelID, String chatID) {
+    Box<ChatMessageModel> chatBox = Hive.box<ChatMessageModel>(chatBoxName);
+
+    chatBox.add(ChatMessageModel(
+        isBot,
+        message,
+        createdAt,
+        userName,
+        channelID,
+        chatID));
   }
 }
 

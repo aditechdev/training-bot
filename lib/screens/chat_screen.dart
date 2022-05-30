@@ -99,18 +99,13 @@ class _ChatScreenState extends State<ChatScreen> {
                           if (messageController.text.isNotEmpty) {
                             var chatID = uuid.v1();
                             if (createChannel) {
-                              Box<ChannelModel> messageBox =
-                                  Hive.box<ChannelModel>(channelBoxName);
-
-                              messageBox.add(ChannelModel(selectedTitle,
-                                  channelID, selectedLanguage, image));
+                              //  Create Channel
+                              chatBloc.createChannel(selectedTitle, channelID,
+                                  selectedLanguage, image);
                             }
 
                             // Create Message box
-                            Box<ChatMessageModel> chatBox =
-                                Hive.box<ChatMessageModel>(chatBoxName);
-
-                            chatBox.add(ChatMessageModel(
+                            chatBloc.createChat(
                                 false,
                                 messageController.text,
                                 DateTime.now()
@@ -118,7 +113,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                     .toString(),
                                 "Aditya Anand",
                                 channelID,
-                                chatID));
+                                chatID);
                           }
                         },
                         child: const Icon(Icons.send, color: Colors.white)),
