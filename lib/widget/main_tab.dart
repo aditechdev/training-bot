@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:training/screens/conversation_page.dart';
+import 'package:training/widget/coming_soon_widget.dart';
 
 class ActiveTabScreen extends StatelessWidget {
   final int activeTab;
@@ -12,13 +13,20 @@ class ActiveTabScreen extends StatelessWidget {
         return const ConversationPage();
 
       case 1:
-        return const Text("Trend Page Comming SOOON");
+        return const ComingSoonWidget(
+          text: "Trend Page",
+        );
       case 2:
-        return const Text("Hey I am Video");
+        return const ComingSoonWidget(
+          text: "Video Page",
+        );
       case 3:
-        return const Text("This is AccountPage");
+        return const ComingSoonWidget(
+          text: "Account Page",
+        );
       default:
         return const Text("Something went wrong! Restart the app");
     }
   }
 }
+

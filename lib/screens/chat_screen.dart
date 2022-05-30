@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:training/adapterers/message_addapter.dart';
 import 'package:training/chat_bloc.dart';
 import 'package:uuid/uuid.dart';
@@ -37,6 +38,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+    print(isKeyboard);
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedTitle),
@@ -53,6 +56,13 @@ class _ChatScreenState extends State<ChatScreen> {
                     List<ChatMessageModel> channelMessageList = chatBloc
                         .fetchCurrentChannelMessages(channelID)
                         .toList();
+                    if (channelMessageList.isEmpty) {
+                      return Padding(
+                        padding: const EdgeInsets.all(70.0),
+                        child:
+                            Lottie.asset("assets/animation/firstMessage.json"),
+                      );
+                    }
                     return ListView.builder(
                         reverse: true,
                         itemCount: channelMessageList.length,

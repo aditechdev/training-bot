@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:training/adapterers/message_addapter.dart';
 import 'package:training/chat_bloc.dart';
 
@@ -20,7 +21,27 @@ class ConversationPage extends StatelessWidget {
                   return const Text("No Data");
                 }
                 if (snapshot.data!.isEmpty) {
-                  return const Center(child: Text("Chat is empty!")); 
+                  return Center(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child:
+                              Lottie.asset("assets/animation/no_message.json"),
+                        ),
+                        const Text(
+                          "Start a conversation 💬",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ],
+                    ),
+                  );
                 }
 
                 return ListView.builder(
