@@ -44,12 +44,9 @@ class ConversationPage extends StatelessWidget {
                       },
                       child: CnversationListWidget(
                         mainImage: channelData.channelImage,
-                        date: " dd",
-                        //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
-                        // dateFormat.format(DateTime.fromMillisecondsSinceEpoch(int.parse(chatData.date)),
+                        date: chatData.getDate(),
                         lastConversation: chatData.message,
                         roundLanguage: channelData.language.substring(0, 2),
-
                         topic: channelData.topic,
                         userName: chatData.userName,
                       ),

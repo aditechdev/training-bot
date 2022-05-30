@@ -12,11 +12,11 @@ import 'screens/chat_screen.dart';
 const String channelBoxName = "channelModel";
 const String chatBoxName = "chatModel";
 main() async {
-  await Hive.initFlutter();
-  Hive.registerAdapter(ChannelModelAdapter());
-  Hive.registerAdapter(ChatMessageModelAdapter());
-  await Hive.openBox<ChannelModel>(channelBoxName);
-  await Hive.openBox<ChatMessageModel>(chatBoxName);
+  
+  await chatBloc.openBox(
+
+
+  );
   runApp(const MyApp());
 }
 

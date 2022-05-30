@@ -87,7 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           return ChatBubble(
                             chatMessage: chatMessageData.message,
                             isBot: chatMessageData.isBot,
-                            createdAt: chatMessageData.date,
+                            createdAt: chatMessageData.getDate(),
                           );
                         });
                   }),
@@ -153,37 +153,43 @@ class ChatBubble extends StatelessWidget {
         left: 16,
         right: 16,
       ),
-      child: Container(
-        color: Colors.blue[600],
-        alignment: isBot ? Alignment.centerLeft : Alignment.centerRight,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 16,
-            right: 16,
-            bottom: 16,
-            left: 16,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                chatMessage,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
+      child: Row(
+        mainAxisAlignment:
+            isBot ? MainAxisAlignment.start : MainAxisAlignment.end,
+        children: [
+          Container(
+            color: Colors.blue[600],
+            alignment: isBot ? Alignment.centerLeft : Alignment.centerRight,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 16,
+                right: 16,
+                bottom: 16,
+                left: 16,
               ),
-              SizedBox(height: 8),
-              Text(
-                createdAt,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.white,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    chatMessage,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    createdAt,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 part 'message_addapter.g.dart';
 
 @HiveType(typeId: 0)
@@ -30,6 +31,16 @@ class ChatMessageModel {
   @HiveField(5)
   String chatID;
 
-  ChatMessageModel(this.isBot, this.message, this.date, this.userName, this.channelID,
-      this.chatID);
+  ChatMessageModel(this.isBot, this.message, this.date, this.userName,
+      this.channelID, this.chatID);
+
+  String getDate() {
+    DateTime d =
+        DateTime.fromMillisecondsSinceEpoch((int.parse(date)), isUtc: true)
+            .toLocal();
+    DateFormat formatter = DateFormat('MM/dd/yyyy h:mm:ss');
+    final String formatted = formatter.format(d);
+
+    return formatted;
+  }
 }
