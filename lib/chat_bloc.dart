@@ -23,6 +23,21 @@ class ChatBloc {
 
     _chats.add(_tempList);
   }
+
+  List<ChatMessageModel> fetchCurrentChannelMessages(String channelID) {
+      List<ChatMessageModel> _temp = _chats.stream.value;
+
+    return _temp.where((element) => element.channelID == channelID).toList();
+
+
+
+  }
+
+  ChatMessageModel fetchLastMessage(String channelID) {
+    List<ChatMessageModel> _temp = _chats.stream.value;
+
+    return _temp.lastWhere((element) => element.channelID == channelID);
+  }
 }
 
 ChatBloc chatBloc = ChatBloc();

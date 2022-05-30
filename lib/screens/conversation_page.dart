@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:training/adapterers/message_addapter.dart';
+import 'package:training/chat_bloc.dart';
 import 'package:training/main.dart';
 
 class ConversationPage extends StatelessWidget {
@@ -15,59 +16,44 @@ class ConversationPage extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
-          ValueListenableBuilder(
-              valueListenable:
-                  Hive.box<ChannelModel>(channelBoxName).listenable(),
-              builder: (BuildContext context, Box<ChannelModel> box, _) {
-                if (box.values.isEmpty) {
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 80,
-                    child: const Center(
-                      child:
-                         
-                          Text(
-                        "The chat is empty",
-                      ),
-                    ),
-                  );
+          StreamBuilder<List<ChannelModel>>(
+              stream: chatBloc.getChannel.stream,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Text("No Data");
                 }
 
-                return ValueListenableBuilder(
-                    valueListenable:
-                        Hive.box<ChatMessageModel>(chatBoxName).listenable(),
-                    builder: (BuildContext context,
-                        Box<ChatMessageModel> messageBox, _) {
-                      return ListView.builder(
-                        itemCount: messageBox.length,
-                        itemBuilder: (BuildContext context, index) {
-                          ChannelModel? messageListElement = box.getAt(index);
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (BuildContext context, index) {
+                    // ChannelModel? messageListElement = box.getAt(index);
 
-                          // ChattMessage? chatMessageList = messageBox;
-                          // Iterable<ChatMessageModel> chatMessageList =
-                          //     messageBox.values.where((element) =>
-                          //         element.chatID == messageListElement?.chatID);
-                          // messageBox.get(messageListElement?.chatID);
+                    // ChattMessage? chatMessageList = messageBox;
+                    // Iterable<ChatMessageModel> chatMessageList =
+                    //     messageBox.values.where((element) =>
+                    //         element.chatID == messageListElement?.chatID);
+                    // messageBox.get(messageListElement?.chatID);
 
-                          DateFormat dateFormat = DateFormat('dd MM yyyy');
+                    // DateFormat dateFormat = DateFormat('dd MM yyyy');
 
-                          return CnversationListWidget(
-                            mainImage: messageListElement!.channelImage,
-                            // color: "",
-                            date: " dd",
-                            //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
-                            lastConversation: "chat Message",
-                            roundLanguage:
-                                messageListElement.language.substring(0, 2),
-                            // smallDotColor: "",
-                            topic: messageListElement.topic,
-                            userName: "UseName",
-                            //  messageBox.values.firstWhere((element) => element.chatID == messageListElement.chatID ).userName,
-                            // index: index,
-                          );
-                        },
-                      );
-                    });
+                    final channelData = snapshot.data![index];
+                    final chatData =chatBloc.fetchLastMessage(channelData.channelID);
+
+                    return CnversationListWidget(
+                      mainImage: channelData.channelImage,
+                      // color: "",
+                      date: " dd",
+                      //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
+                      lastConversation: chatData.message,
+                      roundLanguage: channelData.language.substring(0, 2),
+                      // smallDotColor: "",
+                      topic: channelData.topic,
+                      userName: chatData?.userName ?? " ",
+                      //  messageBox.values.firstWhere((element) => element.chatID == messageListElement.chatID ).userName,
+                      // index: index,
+                    );
+                  },
+                );
               }),
           Positioned(
             bottom: 30,
