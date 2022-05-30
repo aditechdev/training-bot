@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:training/chat_bloc.dart';
 import 'package:training/screens/conversation_page.dart';
 import 'package:training/screens/home_page.dart';
+import 'package:training/screens/splash_screen.dart';
 import 'package:training/screens/start_new_message.dart';
 import 'package:training/widget/appBar_tab.dart';
 
@@ -26,8 +27,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: "/homePage",
+      initialRoute: "/splashScreen",
       routes: {
+        "/splashScreen": (context) => const SplashScree(),
         "/homePage": (context) => const MyHomePage(),
         "startNewMessageScreen": (context) => const StartNewMessageScreen(),
         "chatScreen": (context) => const ChatScreen()
