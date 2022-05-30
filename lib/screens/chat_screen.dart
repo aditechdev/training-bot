@@ -123,6 +123,8 @@ class _ChatScreenState extends State<ChatScreen> {
                               "Aditya Anand",
                               channelID,
                               chatID);
+                          messageController.text = "";
+                          // messageController.dispose();
                         }
                       },
                       child: const Icon(Icons.send, color: Colors.white)),
@@ -158,14 +160,18 @@ class ChatBubble extends StatelessWidget {
             isBot ? MainAxisAlignment.start : MainAxisAlignment.end,
         children: [
           Container(
-            color: Colors.blue[600],
             alignment: isBot ? Alignment.centerLeft : Alignment.centerRight,
+            width: chatMessage.length > 30 ? 300 : null,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.blue[600],
+            ),
             child: Padding(
               padding: const EdgeInsets.only(
-                top: 16,
-                right: 16,
-                bottom: 16,
-                left: 16,
+                top: 4,
+                right: 6,
+                bottom: 4,
+                left: 6,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
