@@ -65,8 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     chatBloc.fetchChannel();
     chatBloc.fetchChats();
-    // TODO: implement initState
-
     super.initState();
   }
 

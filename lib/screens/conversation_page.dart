@@ -20,14 +20,15 @@ class ConversationPage extends StatelessWidget {
               stream: chatBloc.getChannel.stream,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Text("No Data");
+                  return const Text("No Data");
+                }
+                if (snapshot.data!.isEmpty) {
+                  return const Center(child: Text("Chat is empty!")); 
                 }
 
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, index) {
-                    DateFormat dateFormat = DateFormat('dd MM yyyy');
-
                     final channelData = snapshot.data![index];
                     final chatData =
                         chatBloc.fetchLastMessage(channelData.channelID);
