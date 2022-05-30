@@ -37,7 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
     // });
 
-    chatBloc.fetchCurrentChannelMessages(channelID);
+    
 
     super.initState();
   }
@@ -75,10 +75,11 @@ class _ChatScreenState extends State<ChatScreen> {
               StreamBuilder<List<ChatMessageModel>>(
                   stream: chatBloc.getChats,
                   builder: (context, snapshot) {
+                    List<ChatMessageModel> channelMessageList =  chatBloc.fetchCurrentChannelMessages(channelID).toList();
                     return ListView.builder(
-                        itemCount: snapshot.data!.length,
+                        itemCount: channelMessageList.length,
                         itemBuilder: (BuildContext context, index) {
-                          return Text(snapshot.data![index].message);
+                          return Text(channelMessageList[index].message);
                         });
                   }),
               Container(
@@ -122,54 +123,7 @@ class _ChatScreenState extends State<ChatScreen> {
               )
             ],
           ),
-        )
-        // Column(
-        //   children: [
-        //     Expanded(
-        //       child: SizedBox(
-        //         child: SingleChildScrollView(
-        //           dragStartBehavior: DragStartBehavior.down,
-        //           child: Column(
-        //             children: const [
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(),
-        //               NewWidget(
-        //                 text: "OK",
-        //               ),
-        //               SizedBox(
-        //                 height: 50,
-        //               )
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //     TextFormField(
-        //       // style: Style.chatTextStyle
-        //       // .copyWith(color: Theme.activeTextColor, fontSize: 14),
-        //       // controller: _textController,
-        //       // onFieldSubmitted: (String text) => onSubmit(),
-        //       decoration: const InputDecoration(
-        //         border: InputBorder.none,
-        //         hintText: "Type Here",
-        //         // hintStyle: Style.chatTextStyle.copyWith(fontSize: 12)),
-        //       ),
-        //     ),
-        //     // Text("data"),
-        //     // Scaffold(
-        //     //   bottomNavigationBar:
-        //     // )
-        //   ],
-        // ),
-        );
+        ));
   }
 }
 

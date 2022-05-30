@@ -26,7 +26,7 @@ class ConversationPage extends StatelessWidget {
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (BuildContext context, index) {
-                    // DateFormat dateFormat = DateFormat('dd MM yyyy');
+                    DateFormat dateFormat = DateFormat('dd MM yyyy');
 
                     final channelData = snapshot.data![index];
                     final chatData =
@@ -46,6 +46,7 @@ class ConversationPage extends StatelessWidget {
                         mainImage: channelData.channelImage,
                         date: " dd",
                         //  dateFormat.format(DateTime.parse(chatMessageList!.date)).toString(),
+                        // dateFormat.format(DateTime.fromMillisecondsSinceEpoch(int.parse(chatData.date)),
                         lastConversation: chatData.message,
                         roundLanguage: channelData.language.substring(0, 2),
 

@@ -42,16 +42,12 @@ class ChatBloc {
     messageBox.add(ChannelModel(title, channelID, selectedLanguage, image));
   }
 
-  createChat(bool isBot, String message, String createdAt,String userName, String channelID, String chatID) {
+  createChat(bool isBot, String message, String createdAt, String userName,
+      String channelID, String chatID) {
     Box<ChatMessageModel> chatBox = Hive.box<ChatMessageModel>(chatBoxName);
 
     chatBox.add(ChatMessageModel(
-        isBot,
-        message,
-        createdAt,
-        userName,
-        channelID,
-        chatID));
+        isBot, message, createdAt, userName, channelID, chatID));
   }
 }
 
