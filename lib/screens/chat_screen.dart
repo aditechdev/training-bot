@@ -1,11 +1,7 @@
-import 'dart:ffi';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:training/adapterers/message_addapter.dart';
 import 'package:training/chat_bloc.dart';
-import 'package:training/main.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -50,15 +46,6 @@ class _ChatScreenState extends State<ChatScreen> {
     createChannel = a["fromCreaterScreen"];
 
     super.didChangeDependencies();
-  }
-
-  sendMessage() {
-    Map<String, dynamic> messageMap = {
-      "message": messageController.text,
-      "date": DateTime.now().toIso8601String(),
-      "userName": "Aditya",
-      "isBot": false,
-    };
   }
 
   @override

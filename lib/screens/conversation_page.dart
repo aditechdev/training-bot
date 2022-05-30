@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'package:intl/intl.dart';
 import 'package:training/adapterers/message_addapter.dart';
 import 'package:training/chat_bloc.dart';
-import 'package:training/main.dart';
 
 class ConversationPage extends StatelessWidget {
   const ConversationPage({Key? key}) : super(key: key);
