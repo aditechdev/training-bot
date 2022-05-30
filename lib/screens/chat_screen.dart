@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:training/adapterers/message_addapter.dart';
+import 'package:training/chat_bloc.dart';
 import 'package:training/main.dart';
 import 'package:uuid/uuid.dart';
 
@@ -36,20 +37,19 @@ class _ChatScreenState extends State<ChatScreen> {
 
     // });
 
+    chatBloc.fetchCurrentChannelMessages(channelID);
+
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
     Map a = ModalRoute.of(context)!.settings.arguments as Map;
-    // Future.delayed(const Duration(milliseconds: 1000), () async{
-    // setState(() {
     selectedLanguage = a["learningLanguage"];
     selectedTitle = a["topic"];
     image = a["image"];
     channelID = a["channelID"];
     createChannel = a["fromCreaterScreen"];
-    // });
 
     super.didChangeDependencies();
   }
@@ -72,6 +72,15 @@ class _ChatScreenState extends State<ChatScreen> {
         body: Container(
           child: Stack(
             children: [
+              StreamBuilder<List<ChatMessageModel>>(
+                  stream: chatBloc.getChats,
+                  builder: (context, snapshot) {
+                    return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext context, index) {
+                          return Text(snapshot.data![index].message);
+                        });
+                  }),
               Container(
                 alignment: Alignment.bottomCenter,
                 child: TextFormField(
@@ -93,8 +102,8 @@ class _ChatScreenState extends State<ChatScreen> {
                               Box<ChannelModel> messageBox =
                                   Hive.box<ChannelModel>(channelBoxName);
 
-                              messageBox.add(ChannelModel(selectedTitle, channelID,
-                                  selectedLanguage, image));
+                              messageBox.add(ChannelModel(selectedTitle,
+                                  channelID, selectedLanguage, image));
                             }
 
                             // Create Message box
@@ -110,13 +119,6 @@ class _ChatScreenState extends State<ChatScreen> {
                                 "Aditya Anand",
                                 channelID,
                                 chatID));
-
-                            // chatBox.add(ChatMessageModel(
-                            //     false,
-                            //     messageController.text,
-                            //     DateTime.now().toIso8601String(),
-                            //     "Aditya Anand",
-                            //     uuid));
                           }
                         },
                         child: const Icon(Icons.send, color: Colors.white)),

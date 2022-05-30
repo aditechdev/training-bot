@@ -28,9 +28,6 @@ class ChatBloc {
       List<ChatMessageModel> _temp = _chats.stream.value;
 
     return _temp.where((element) => element.channelID == channelID).toList();
-
-
-
   }
 
   ChatMessageModel fetchLastMessage(String channelID) {
