@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:training/adapterers/message_addapter.dart';
+import 'package:training/chat_bloc.dart';
 import 'package:training/screens/conversation_page.dart';
 import 'package:training/screens/start_new_message.dart';
 import 'package:training/widget/appBar_tab.dart';
@@ -59,6 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
       'tabLabel': 'Account'
     },
   ];
+
+  @override
+  void initState() {
+    chatBloc.fetchChannel();
+    chatBloc.fetchChats();
+    // TODO: implement initState
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
