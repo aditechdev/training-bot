@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:training/adapterers/message_addapter.dart';
+import 'package:training/main.dart';
 
 class ConversationPage extends StatelessWidget {
   const ConversationPage({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class ConversationPage extends StatelessWidget {
         children: [
           ValueListenableBuilder(
               valueListenable:
-                  Hive.box<ChannelModel>('channelModel').listenable(),
+                  Hive.box<ChannelModel>(channelBoxName).listenable(),
               builder: (BuildContext context, Box<ChannelModel> box, _) {
                 if (box.values.isEmpty) {
                   return SizedBox(
@@ -34,7 +35,7 @@ class ConversationPage extends StatelessWidget {
 
                 return ValueListenableBuilder(
                     valueListenable:
-                        Hive.box<ChatMessageModel>('chatMessagePDL').listenable(),
+                        Hive.box<ChatMessageModel>(chatBoxName).listenable(),
                     builder: (BuildContext context,
                         Box<ChatMessageModel> messageBox, _) {
                       return ListView.builder(
