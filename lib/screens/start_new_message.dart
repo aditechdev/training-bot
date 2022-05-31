@@ -100,17 +100,16 @@ class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
         ),
         body: Stack(
           children: [
-            // const SizedBox(
-            //   height: 40,
-            // ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 100,
-                ),
                 const Text(
                   "Select One option",
-                  style: TextStyle(fontSize: 20, color: Colors.black87),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 const SizedBox(
                   height: 40,
@@ -138,7 +137,6 @@ class _StartNewMessageScreenState extends State<StartNewMessageScreen> {
                 )
               ],
             ),
-
             boolShowMyLanguageList
                 ? Positioned(
                     left: 55,
@@ -272,56 +270,6 @@ class ScrollImage extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class MultiCircle extends StatelessWidget {
-  const MultiCircle({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: 120,
-        width: 120,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.green[300],
-        ),
-        child: Center(
-          child: Container(
-            height: 100,
-            width: 100,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-            child: Center(
-              child: Container(
-                height: 80,
-                width: 80,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blue[200],
-                ),
-                child: Center(
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey[400],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
         ),
       ),
     );
