@@ -7,7 +7,7 @@ class SplashScree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context,'/homePage');
+      Navigator.pushReplacementNamed(context, '/homePage');
     });
     return Padding(
       padding: const EdgeInsets.all(50.0),
