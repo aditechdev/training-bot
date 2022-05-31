@@ -70,6 +70,32 @@ class ConversationPage extends StatelessWidget {
                         roundLanguage: channelData.language.substring(0, 2),
                         topic: channelData.topic,
                         userName: chatData.userName,
+                        onTap: () {
+                          // chatBloc.deleteChatsAndChannel(index);
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text("Delete this chat?"),
+                                  actions: [
+                                    TextButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text("No")),
+                                    TextButton(
+                                        onPressed: () {
+                                          chatBloc.deleteChatsAndChannel(index);
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text(
+                                          "Yes",
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                          ),
+                                        )),
+                                  ],
+                                );
+                              });
+                        },
                       ),
                     );
                   },
@@ -111,6 +137,7 @@ class CnversationListWidget extends StatelessWidget {
   final String lastConversation;
   // final String color;
   final String date;
+  final Function() onTap;
   // final String smallDotColor;
 
   const CnversationListWidget({
@@ -122,6 +149,7 @@ class CnversationListWidget extends StatelessWidget {
     required this.lastConversation,
     // required this.color,
     required this.date,
+    required this.onTap,
     // required this.smallDotColor,
     // this.index = 19,
   }) : super(key: key);
@@ -244,14 +272,20 @@ class CnversationListWidget extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                          height: 15,
-                          width: 15,
-                          decoration: const BoxDecoration(
-                            color: Colors.green,
-                            shape: BoxShape.circle,
-                          ),
-                        )
+                        InkWell(
+                            onTap: onTap,
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ))
+                        // Container(
+                        //   height: 15,
+                        //   width: 15,
+                        //   decoration: const BoxDecoration(
+                        //     color: Colors.green,
+                        //     shape: BoxShape.circle,
+                        //   ),
+                        // )
                       ],
                     ),
                   ],

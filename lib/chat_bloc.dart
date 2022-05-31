@@ -119,6 +119,13 @@ class ChatBloc {
       return "Incorrect respose 😔\nPlease try again!";
     }
   }
+
+  deleteChatsAndChannel(int index) {
+    messageBox!.deleteAt(index);
+
+    fetchChannel();
+  }
+  
 }
 
 ChatBloc chatBloc = ChatBloc();
