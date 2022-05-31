@@ -45,7 +45,7 @@ class ChatBloc {
 
   ChatMessageModel fetchLastMessage(String channelID) {
     List<ChatMessageModel> _temp = _chats.stream.value;
-
+    _temp.sort((b, a) => b.date.compareTo(a.date));
     return _temp.lastWhere((element) => element.channelID == channelID);
   }
 
@@ -61,9 +61,10 @@ class ChatBloc {
     await chatBox?.add(ChatMessageModel(
         isBot, message, createdAt, userName, channelID, chatID));
     await fetchChats();
-     fetchLastMessage(channelID);
+    fetchLastMessage(channelID);
+    fetchCurrentChannelMessages(channelID);
     await fetchChannel();
-    
+
     // chatBloc.fetchLastMessage(channelData.channelID);
   }
 

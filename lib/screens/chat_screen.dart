@@ -104,7 +104,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               false,
                               messageController.text,
                               DateTime.now().millisecondsSinceEpoch.toString(),
-                              "Aditya Anand",
+                              "Me",
                               channelID,
                               chatID);
                           messageController.text = "";
