@@ -151,7 +151,6 @@ class CnversationListWidget extends StatelessWidget {
                     height: 50,
                     width: 50,
                     decoration: const BoxDecoration(
-                      color: Colors.red,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
@@ -198,20 +197,50 @@ class CnversationListWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(topic),
-                        Text(date),
+                        Text(
+                          topic,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 16,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Text(
+                          date,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 13,
+                            color: Colors.black54,
+                          ),
+                        ),
                       ],
+                    ),
+                    const SizedBox(
+                      height: 4,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        Text(
+                          "$userName: ",
+                          maxLines: 1,
+                          style: const TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.blue,
+                          ),
+                        ),
                         Expanded(
                           child: Text(
-                            "$userName: $lastConversation",
+                            lastConversation,
                             maxLines: 1,
                             style: const TextStyle(
                               overflow: TextOverflow.ellipsis,
                               fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black87,
                             ),
                           ),
                         ),
