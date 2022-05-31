@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:training/adapterers/message_addapter.dart';
 import 'package:training/chat_bloc.dart';
+import 'package:training/const/colors.dart';
 import 'package:uuid/uuid.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+// import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -19,8 +22,12 @@ class _ChatScreenState extends State<ChatScreen> {
   String channelID = " ";
   bool createChannel = false;
   var uuid = const Uuid();
+  stt.SpeechToText? _speech;
+  bool isSpeechActive = false;
+
   @override
   void initState() {
+    _speech = stt.SpeechToText();
     super.initState();
   }
 
@@ -75,7 +82,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   }),
             ),
             Container(
-              alignment: Alignment.bottomCenter,
+              // alignment: Alignment.bottomCenter,
               child: TextFormField(
                 // style: Style.chatTextStyle
                 // .copyWith(color: Theme.activeTextColor, fontSize: 14),
@@ -87,7 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Type Here",
-                  fillColor: Colors.black38,
+                  fillColor: bottomChatColor,
                   filled: true,
                   suffixIcon: InkWell(
                       onTap: () {
@@ -114,7 +121,19 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: const Icon(Icons.send, color: Colors.white)),
                 ),
               ),
-            )
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              color: bottomChatColor,
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.mic,
+                  size: 40,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
           ],
         ));
   }
