@@ -62,10 +62,11 @@ class ChatBloc {
         isBot, message, createdAt, userName, channelID, chatID));
     await fetchChats();
     await fetchChannel();
+    fetchLastMessage(channelID);
+    // chatBloc.fetchLastMessage(channelData.channelID);
   }
 
   // Future<void> createBotChat() {
-
 
   // }
 }

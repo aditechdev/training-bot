@@ -201,17 +201,15 @@ class CnversationListWidget extends StatelessWidget {
                       ],
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: Center(
-                            child: Text(
-                              "$userName: $lastConversation",
-                              maxLines: 1,
-                              style: const TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                                fontSize: 16,
-                              ),
+                          child: Text(
+                            "$userName: $lastConversation",
+                            maxLines: 1,
+                            style: const TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              fontSize: 16,
                             ),
                           ),
                         ),
