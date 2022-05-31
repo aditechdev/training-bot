@@ -25,6 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
   var uuid = const Uuid();
   stt.SpeechToText? _speech;
   bool isLintening = false;
+  List<ChatMessageModel> channelMessageList = [];
 
   @override
   void initState() {
@@ -59,7 +60,7 @@ class _ChatScreenState extends State<ChatScreen> {
               child: StreamBuilder<List<ChatMessageModel>>(
                   stream: chatBloc.getChats,
                   builder: (context, snapshot) {
-                    List<ChatMessageModel> channelMessageList = chatBloc
+                    channelMessageList = chatBloc
                         .fetchCurrentChannelMessages(channelID)
                         .toList();
                     if (channelMessageList.isEmpty) {
@@ -101,7 +102,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       onTap: () {
                         if (messageController.text.isNotEmpty) {
                           var chatID = uuid.v1();
-                          if (createChannel) {
+                          if (createChannel && channelMessageList.isEmpty ) {
                             //  Create Channel
                             chatBloc.createChannel(selectedTitle, channelID,
                                 selectedLanguage, image);
