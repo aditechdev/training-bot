@@ -211,21 +211,28 @@ class ChatBubble extends StatelessWidget {
                 left: 6,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment:
+                    isBot ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+                // mainAxisAlignment:
+                // isBot ? MainAxisAlignment.start : MainAxisAlignment.end,
                 children: [
                   Text(
                     chatMessage,
+                    textAlign: isBot ? TextAlign.start : TextAlign.end,
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Text(
-                    createdAt,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.white,
+                  Padding(
+                    padding: EdgeInsets.only(left: isBot ? 0 : 8),
+                    child: Text(
+                      createdAt,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],

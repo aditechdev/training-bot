@@ -116,7 +116,7 @@ class ChatBloc {
     if (r != null) {
       return r["bot"];
     } else {
-      return "Incorrect respose 😔\n Please try again!";
+      return "Incorrect respose 😔\nPlease try again!";
     }
   }
 }
