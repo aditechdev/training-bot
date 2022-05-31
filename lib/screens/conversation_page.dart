@@ -10,7 +10,7 @@ class ConversationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height -
-          MediaQuery.of(context).size.height * 0.136,
+          MediaQuery.of(context).size.height * 0.1361,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
