@@ -18,7 +18,9 @@ class ConversationPage extends StatelessWidget {
               stream: chatBloc.getChannel.stream,
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return const Text("No Data"); //TODO Add No Data Loder
+                  return Center(
+                    child: Lottie.asset("assets/animation/loader.json"),
+                  );
                 }
                 if (snapshot.data!.isEmpty) {
                   return Center(
