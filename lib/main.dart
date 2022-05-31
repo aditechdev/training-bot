@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:training/chat_bloc.dart';
-import 'package:training/screens/conversation_page.dart';
 import 'package:training/screens/home_page.dart';
 import 'package:training/screens/splash_screen.dart';
 import 'package:training/screens/start_new_message.dart';
-import 'package:training/widget/appBar_tab.dart';
 
 import 'screens/chat_screen.dart';
 
