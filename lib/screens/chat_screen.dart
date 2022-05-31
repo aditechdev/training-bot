@@ -1,3 +1,4 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:training/adapterers/message_addapter.dart';
@@ -23,7 +24,7 @@ class _ChatScreenState extends State<ChatScreen> {
   bool createChannel = false;
   var uuid = const Uuid();
   stt.SpeechToText? _speech;
-  bool isSpeechActive = false;
+  bool isLintening = false;
 
   @override
   void initState() {
@@ -125,17 +126,54 @@ class _ChatScreenState extends State<ChatScreen> {
             Container(
               width: MediaQuery.of(context).size.width,
               color: bottomChatColor,
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.all(8.0),
-                child: Icon(
-                  Icons.mic,
-                  size: 40,
-                  color: Colors.blue,
+                child: AvatarGlow(
+                  animate: isLintening,
+                  glowColor: Colors.white,
+                  endRadius: isLintening ? 50 : 20,
+                  duration: Duration(milliseconds: 2000),
+                  repeatPauseDuration: Duration(milliseconds: 100),
+                  repeat: true,
+                  child: InkWell(
+                    onTap: mikeTap,
+                    child: Icon(
+                      Icons.mic,
+                      size: 40,
+                      color: Colors.blue,
+                    ),
+                  ),
                 ),
               ),
             ),
           ],
         ));
+  }
+
+  void mikeTap() async {
+    if (!isLintening) {
+      bool available = await _speech!.initialize(
+        onStatus: (val) => print(val),
+        onError: (val) => print(val),
+      );
+      if (available) {
+        setState(() {
+          isLintening = true;
+        });
+        _speech!.listen(onResult: (val) {
+          setState(() {
+            messageController.text = val.recognizedWords;
+          });
+        });
+      }
+      // else {
+      //   setState(() => isLintening = false);
+      //   _speech!.stop();
+      // }
+    } else {
+      setState(() => isLintening = false);
+      _speech!.stop();
+    }
   }
 }
 

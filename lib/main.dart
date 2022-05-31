@@ -44,7 +44,5 @@ class MyApp extends StatelessWidget {
 
 // TODO 3:  Validate New Channel Page message
 // TODO 4:  Design Account
-// TODO 5:  Setup API for chat
 // TODO 7:  Color Pick Up List
 // TODO 8:  Sign in Page
-// TODO 9:  Speach to text implementation
