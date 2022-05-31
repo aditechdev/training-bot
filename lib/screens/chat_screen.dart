@@ -38,8 +38,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
-    print(isKeyboard);
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedTitle),
@@ -83,7 +81,9 @@ class _ChatScreenState extends State<ChatScreen> {
                 // .copyWith(color: Theme.activeTextColor, fontSize: 14),
                 controller: messageController,
                 // onFieldSubmitted: (String text) => onSubmit(),
-
+                textInputAction: TextInputAction.newline,
+                // maxLines: 3,
+                maxLines: 2,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Type Here",

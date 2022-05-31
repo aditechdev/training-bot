@@ -61,8 +61,9 @@ class ChatBloc {
     await chatBox?.add(ChatMessageModel(
         isBot, message, createdAt, userName, channelID, chatID));
     await fetchChats();
+     fetchLastMessage(channelID);
     await fetchChannel();
-    fetchLastMessage(channelID);
+    
     // chatBloc.fetchLastMessage(channelData.channelID);
   }
 
