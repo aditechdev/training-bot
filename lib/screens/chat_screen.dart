@@ -84,25 +84,24 @@ class _ChatScreenState extends State<ChatScreen> {
                   }),
             ),
             Container(
-              // alignment: Alignment.bottomCenter,
               child: TextFormField(
-                // style: Style.chatTextStyle
-                // .copyWith(color: Theme.activeTextColor, fontSize: 14),
                 controller: messageController,
-                // onFieldSubmitted: (String text) => onSubmit(),
                 textInputAction: TextInputAction.newline,
-                // maxLines: 3,
                 maxLines: 2,
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
+                cursorColor: Colors.blue,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Type Here",
+                  hintText: "Message here ...",
                   fillColor: bottomChatColor,
                   filled: true,
                   suffixIcon: InkWell(
                       onTap: () {
                         if (messageController.text.isNotEmpty) {
                           var chatID = uuid.v1();
-                          if (createChannel && channelMessageList.isEmpty ) {
+                          if (createChannel && channelMessageList.isEmpty) {
                             //  Create Channel
                             chatBloc.createChannel(selectedTitle, channelID,
                                 selectedLanguage, image);
@@ -120,7 +119,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           // messageController.dispose();
                         }
                       },
-                      child: const Icon(Icons.send, color: Colors.white)),
+                      child: const Icon(Icons.send, color: Colors.blue)),
                 ),
               ),
             ),
@@ -128,17 +127,17 @@ class _ChatScreenState extends State<ChatScreen> {
               width: MediaQuery.of(context).size.width,
               color: bottomChatColor,
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: AvatarGlow(
                   animate: isLintening,
-                  glowColor: Colors.white,
+                  glowColor: Colors.blue,
                   endRadius: isLintening ? 50 : 20,
-                  duration: Duration(milliseconds: 2000),
-                  repeatPauseDuration: Duration(milliseconds: 100),
+                  duration: const Duration(milliseconds: 2000),
+                  repeatPauseDuration: const Duration(milliseconds: 100),
                   repeat: true,
                   child: InkWell(
                     onTap: mikeTap,
-                    child: Icon(
+                    child: const Icon(
                       Icons.mic,
                       size: 40,
                       color: Colors.blue,
@@ -167,10 +166,6 @@ class _ChatScreenState extends State<ChatScreen> {
           });
         });
       }
-      // else {
-      //   setState(() => isLintening = false);
-      //   _speech!.stop();
-      // }
     } else {
       setState(() => isLintening = false);
       _speech!.stop();

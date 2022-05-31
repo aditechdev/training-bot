@@ -82,6 +82,7 @@ class ChatBloc {
 
   Future<void> createChat(bool isBot, String message, String createdAt,
       String userName, String channelID, String chatID) async {
+    message = message.trim();
     await chatBox?.add(ChatMessageModel(
         isBot, message, createdAt, userName, channelID, chatID));
     await fetchChats();
@@ -108,14 +109,14 @@ class ChatBloc {
   String fetchBotAction(String message) {
     // String reply = "";
 
-    Map r = botBox?.toMap().values.toList().firstWhere(
+    final r = botBox?.toMap().values.toList().firstWhere(
         (element) => element['human'] == message,
         orElse: () => null);
 
     if (r != null) {
       return r["bot"];
     } else {
-      return "Incorrect respose";
+      return "Incorrect respose 😔\n Please try again!";
     }
   }
 }
