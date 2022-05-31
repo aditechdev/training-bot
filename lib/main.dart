@@ -42,12 +42,10 @@ class MyApp extends StatelessWidget {
 
 
 
-// TODO 1:  Add empty image for 0 chat PLP
-// TODO 2:  Add empty image for Treand
-// TODO 3:  Add empty image for Video
+
+// TODO 3:  Validate New Channel Page message
 // TODO 4:  Design Account
 // TODO 5:  Setup API for chat
-// TODO 6:  Splash Screen
 // TODO 7:  Color Pick Up List
 // TODO 8:  Sign in Page
 // TODO 9:  Speach to text implementation
