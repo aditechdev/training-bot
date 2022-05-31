@@ -10,6 +10,7 @@ const String channelBoxName = "channelModel";
 const String chatBoxName = "chatModel";
 main() async {
   await chatBloc.openBox();
+  
   runApp(const MyApp());
 }
 

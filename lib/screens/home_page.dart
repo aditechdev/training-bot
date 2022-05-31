@@ -10,9 +10,6 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-
-
-
 class _MyHomePageState extends State<MyHomePage> {
   int activeTabIndex = 0;
 
@@ -30,6 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     chatBloc.fetchChannel();
     chatBloc.fetchChats();
+    chatBloc.botBoxSync();
     super.initState();
   }
 
