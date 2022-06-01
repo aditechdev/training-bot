@@ -4,7 +4,7 @@ Tranning is flutter messaging app, which has the feature to chat with bots
 #Tech Stack Used
 Flutter | Dart | Hive | VS Code
 
-#Key Feature of the project
+# Key Feature of the project
 - App can be used online and offline with sets of message
 - It has the feautre of storing online data 
 - chat Message and channel
